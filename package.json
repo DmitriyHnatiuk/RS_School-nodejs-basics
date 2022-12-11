@@ -1,0 +1,21 @@
+{
+  "name": "task_2",
+  "version": "1.0.0",
+  "description": "[Assignment task_2](https://github.com/AlreadyBored/nodejs-assignments/blob/main/assignments/file-manager/assignment.md#assignment-file-manager)",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node src/index.js --username=John_Doe"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DmitriyHnatiuk/RS_School-nodejs-basics.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DmitriyHnatiuk/RS_School-nodejs-basics/issues"
+  },
+  "homepage": "https://github.com/DmitriyHnatiuk/RS_School-nodejs-basics#readme"
+}
