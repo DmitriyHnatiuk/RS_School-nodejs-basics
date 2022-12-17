@@ -1,3 +1,4 @@
+import readline from 'readline/promises';
 import { COMMANDS } from './commands.js';
 import { CustomError } from './utils/customError.js';
 import { messageText } from './utils/formatText.js';
@@ -14,20 +15,25 @@ const currentDirectory = () =>
 
 const cliStart = () => {
   try {
+    const _readline = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
     console.log(messageText(`Welcome to the File Manager, ${_username}!`));
 
-    process.chdir(process.env.HOME);
+    process.chdir(process.env.HOME || process.env.USERPROFILE);
 
     currentDirectory();
 
-    process.on('SIGINT', () => process.exit());
-    process.on('exit', () =>
+    _readline.on('SIGINT', () => process.exit());
+    process.on('exit', () => {
       console.log(
         messageText(
           `\nThank you for using File Manager, ${_username}, goodbye!`
         )
-      )
-    );
+      );
+      _readline.close();
+    });
     process.on('uncaughtException', (error) => {
       const _error =
         error.code === 'ERROR_FAILED'
@@ -36,7 +42,7 @@ const cliStart = () => {
       console.error(_error);
     });
 
-    process.stdin.on('data', async (data) => {
+    _readline.on('line', async (data) => {
       const [command, args] = parseParamsString(data);
 
       if (command === '.exit') {
